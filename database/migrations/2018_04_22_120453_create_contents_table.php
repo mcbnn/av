@@ -16,7 +16,8 @@ class CreateContentsTable extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('param_id');
-            $table->string('key')->index();
+            $table->string('key')->index()->unique();
+            $table->string('url')->index()->unique();
             $table->timestamps();
             $table->foreign('param_id')->references('id')->on('params');
         });

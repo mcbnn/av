@@ -10,7 +10,8 @@
         "illuminate/html": "^5.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^5.6"
+        "laravelcollective/html": "^5.6",
+        "sunra/php-simple-html-dom-parser": "^1.5"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
