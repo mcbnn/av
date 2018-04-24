@@ -18,4 +18,20 @@ class Contents extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function setValueParser($item, $parsers)
+    {
+        foreach($parsers as $parser){
+            $this->add(['']);
+            die();
+        }
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function order()
+    {
+        return $this->belongsTo(\App\Params::class, 'param_id', 'id');
+    }
 }

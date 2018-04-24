@@ -17,6 +17,7 @@
                                             {{$item->id}} {{$item->value}}
                                         </a>
                                         <a href="{{route('params.edit', ['id' => $item->id])}}">Edit</a>
+                                        <a href="{{route('parser-url', ['id' => $item->id])}}">Parser All</a>
                                         {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}
                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                                         {{ Form::close() }}

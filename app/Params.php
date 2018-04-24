@@ -19,6 +19,14 @@ class Params extends Model
         'updated_at'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contents() {
+        return $this->hasMany(\App\Contents::class, 'param_id', 'id');
+    }
+
+
     public static function boot() {
         static::creating(function ($item) {
           if(!$item->user_id){
