@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Cписок параметров:</div>
                     <div class="card-body">
@@ -10,20 +10,58 @@
                             <a class="btn btn-primary btn-sm" href="{{route('params.create')}}">Добавить</a>
                         </div>
                         @if($list)
-                            <ul class="list-group">
+                            <table class = "table table-bordered">
+                                <thead>
+                                    <th>id</th>
+                                    <th>name</th>
+                                    <th>value</th>
+                                    <th>edit</th>
+                                    <th>parser ALL</th>
+                                    <th>count</th>
+                                    <th>cron</th>
+                                    <th>update</th>
+                                    <th>delete</th>
+                                </thead>
+                                <tbody>
                                 @foreach($list as $item)
-                                    <li class="list-group-item">
-                                        <a href="{{url('params', ['id' => $item->id])}}">
-                                            {{$item->id}} {{$item->value}}
-                                        </a>
-                                        <a href="{{route('params.edit', ['id' => $item->id])}}">Edit</a>
-                                        <a href="{{route('parser-url', ['id' => $item->id])}}">Parser All</a>
-                                        {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}
-                                        {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-                                        {{ Form::close() }}
-                                    </li>
+                                    <tr>
+                                        <td>
+                                            <a href="{{url('params', ['id' => $item->id])}}">
+                                                {{$item->id}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{$item->name}}
+                                        </td>
+                                        <td>
+                                            <a target="_blank" href="{{$item->value}}">
+                                                {{$item->value}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('params.edit', ['id' => $item->id])}}">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('parser-url', ['id' => $item->id])}}">Parser All</a>
+                                        </td>
+                                        <td>
+                                            {{$item->count}}
+                                        </td>
+                                        <td>
+                                            {{$item->updated_at->format('d.m.Y H:i:s')}}
+                                        </td>
+                                        <td>
+                                            {{$item->cron}}
+                                        </td>
+                                        <td>
+                                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}
+                                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                            {{ Form::close() }}
+                                        </td>
+                                    </tr>
                                 @endforeach
-                            </ul>
+                                </tbody>
+                            </table>
                         @endif
                     </div>
                 </div>

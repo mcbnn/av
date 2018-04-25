@@ -29,13 +29,8 @@ class ParserController extends Controller
         if(!$param)abort(404);
         $urls = $this->getPaginationLink($param->value);
         $parsers = $this->parser($urls);
-        foreach($parsers as $key => $parser){
-            if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
-            $content = new \App\Contents();
-            $content->key = $key;
-            $content->url = $parser;
-            $param->contents()->save($content);
-        }
+        $param->saveContents($parsers);
+        return redirect('params');
     }
 
     /**
@@ -69,13 +64,7 @@ class ParserController extends Controller
         /** @var \App\Params $item */
         foreach ($params as $item){
             $parsers = $this->parser($item->value);
-            foreach($parsers as $key => $parser){
-                if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
-                $content = new \App\Contents();
-                $content->key = $key;
-                $content->url = $parser;
-                $item->contents()->save($content);
-            }
+            $item->saveContents($parsers);
         }
     }
 

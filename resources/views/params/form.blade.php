@@ -8,5 +8,10 @@
     {!! Form::text('value', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::hidden('cron', false) !!}
+    {!! Form::label('cron', 'cron:') !!}
+    {!! Form::checkbox('cron') !!}
+</div>
+<div class="form-group">
     {!! Form::submit($submit_text, ['class' => 'btn btn-primary form-control']) !!}
 </div>

@@ -103,6 +103,7 @@ class ParamsController extends Controller
         $param = Params::find($id);
 
         if(!$param)abort(404);
+        $param->contents()->delete();
         $param->delete();
         return redirect('params');
     }

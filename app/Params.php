@@ -9,7 +9,8 @@ class Params extends Model
 {
     protected $fillable = [
         'name',
-        'value'
+        'value',
+        'cron'
     ];
 
     protected $table = "params";
@@ -19,6 +20,10 @@ class Params extends Model
         'updated_at'
     ];
 
+    public function setCronAttribute($value)
+    {
+        $this->attributes['cron'] = ($value == null)?0:1;
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -26,7 +31,22 @@ class Params extends Model
         return $this->hasMany(\App\Contents::class, 'param_id', 'id');
     }
 
+    public function saveContents($parsers = null)
+    {
+        if(!$parsers)return null;
+        foreach($parsers as $key => $parser){
+            if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
+            $content = new \App\Contents();
+            $content->key = $key;
+            $content->url = $parser;
+            $this->contents()->save($content);
+        }
+        return true;
+    }
 
+    /**
+     *
+     */
     public static function boot() {
         static::creating(function ($item) {
           if(!$item->user_id){
