@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Sunra\PhpSimple\HtmlDomParser;
 
+
 class ParserController extends Controller
 {
     public $domain = "https://www.avito.ru/";
@@ -16,12 +17,14 @@ class ParserController extends Controller
      */
     public function init()
     {
-        $params = \App\Params::all();
+        $params = \App\Params::where('cron', 1)->get();
         $this->model($params);
     }
 
     /**
      * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function parserUrl($id)
     {
@@ -65,6 +68,7 @@ class ParserController extends Controller
         foreach ($params as $item){
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
+            if($item->el)$item->sendMail($item);
         }
     }
 

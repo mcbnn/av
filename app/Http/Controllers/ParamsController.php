@@ -24,7 +24,7 @@ class ParamsController extends Controller
      */
     public function index()
     {
-        $list = Params::all();
+        $list = Params::where('user_id', \Auth::id())->get();
         return view('params.index', compact('list'));
     }
 
@@ -101,7 +101,6 @@ class ParamsController extends Controller
     public function destroy($id)
     {
         $param = Params::find($id);
-
         if(!$param)abort(404);
         $param->contents()->delete();
         $param->delete();

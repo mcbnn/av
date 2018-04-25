@@ -48,10 +48,10 @@
                                             {{$item->count}}
                                         </td>
                                         <td>
-                                            {{$item->updated_at->format('d.m.Y H:i:s')}}
+                                            {{$item->cron}}
                                         </td>
                                         <td>
-                                            {{$item->cron}}
+                                            {{$item->updated_at->format('d.m.Y H:i:s')}}
                                         </td>
                                         <td>
                                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}

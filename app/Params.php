@@ -2,11 +2,15 @@
 
 namespace App;
 
+
+use App\Http\Traits\MailTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Params extends Model
 {
+    use MailTrait;
+
     protected $fillable = [
         'name',
         'value',
@@ -31,6 +35,14 @@ class Params extends Model
         return $this->hasMany(\App\Contents::class, 'param_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class, 'user_id', 'id');
+    }
+
     public function saveContents($parsers = null)
     {
         if(!$parsers)return null;
@@ -39,6 +51,7 @@ class Params extends Model
             $content = new \App\Contents();
             $content->key = $key;
             $content->url = $parser;
+            $this->setElement($content);
             $this->contents()->save($content);
         }
         return true;
