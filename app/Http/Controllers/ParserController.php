@@ -46,7 +46,8 @@ class ParserController extends Controller
     {
         $dom = HtmlDomParser::str_get_html(file_get_contents($url));
         $_url = $dom->find('a.pagination-page');
-        var_dump(count($_url));die();
+        var_dump(file_get_contents($url));
+        var_dump($_url);die();
         if(!count($_url))return [$url];
         $_url = end($_url);
 
