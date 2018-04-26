@@ -21,6 +21,15 @@ class ParserController extends Controller
         $this->model($params);
     }
 
+    public function test($id)
+    {
+        $param = \App\Params::find($id);
+        if(!$param)abort(404);
+        $url = $param->url;
+        return $this->getHtmlAvito($url);
+    }
+
+
     /**
      * @param $id
      *

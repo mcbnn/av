@@ -20,6 +20,7 @@
                                     <th>count</th>
                                     <th>cron</th>
                                     <th>update</th>
+                                    <th>test</th>
                                     <th>delete</th>
                                 </thead>
                                 <tbody>
@@ -52,6 +53,9 @@
                                         </td>
                                         <td>
                                             {{$item->updated_at->format('d.m.Y H:i:s')}}
+                                        </td>
+                                        <td>
+                                            <a href="{{route('parser-test', ['id' => $item->id])}}">Parser All</a>
                                         </td>
                                         <td>
                                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}

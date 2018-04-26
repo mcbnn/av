@@ -15,5 +15,6 @@ Route::resource('params', 'ParamsController');
 Auth::routes();
 Route::get('/', 'ParamsController@index')->name('home');
 Route::get('/parser/{id}', 'ParserController@parserUrl')->name('parser-url');
+Route::get('/parser/test/{id}', 'ParserController@test')->name('parser-test');
 Route::get('/parser', 'ParserController@parser');
 Route::get('/init', 'ParserController@init');
