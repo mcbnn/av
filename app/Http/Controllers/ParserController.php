@@ -43,6 +43,7 @@ class ParserController extends Controller
      */
     public function getPaginationLink($url)
     {
+        print(date_default_timezone_get());
         print_r(date('d.n.Y H:i:s'));
         phpinfo();
         die();
