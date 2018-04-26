@@ -24,7 +24,7 @@ class ParamsController extends Controller
      */
     public function index()
     {
-        $list = Params::where('user_id', \Auth::id())->get();
+        $list = Params::where('user_id', \Auth::id())->get()->order('id', 'DESC');
         return view('params.index', compact('list'));
     }
 
