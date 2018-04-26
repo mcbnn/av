@@ -26,6 +26,7 @@ class ParserController extends Controller
         $param = \App\Params::find($id);
         if(!$param)abort(404);
         $url = $param->url;
+        var_dump($url);diE();
         return $this->getHtmlAvito($url);
     }
 
