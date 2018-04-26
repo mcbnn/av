@@ -55,7 +55,7 @@
                                             {{$item->updated_at->format('d.m.Y H:i:s')}}
                                         </td>
                                         <td>
-                                            <a href="{{route('parser-test', ['id' => $item->id])}}">Parser All</a>
+                                            <a href="{{route('parser-test', ['id' => $item->id])}}">test</a>
                                         </td>
                                         <td>
                                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}
