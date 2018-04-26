@@ -31,6 +31,7 @@ class ParserController extends Controller
         $param = \App\Params::find($id);
         if(!$param)abort(404);
         $urls = $this->getPaginationLink($param->value);
+        var_dump($urls);die();
         $parsers = $this->parser($urls);
         $param->saveContents($parsers);
         return redirect('params');
