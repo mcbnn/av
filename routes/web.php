@@ -13,7 +13,7 @@
 
 Route::resource('params', 'ParamsController');
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ParamsController@index')->name('home');
 Route::get('/', 'ParamsController@index');
 Route::get('/parser/{id}', 'ParserController@parserUrl')->name('parser-url');
 Route::get('/parser', 'ParserController@parser');
