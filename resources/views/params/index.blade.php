@@ -31,7 +31,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            {{ Str::limit($item->name, 10) }}
+                                            {{ str_limit($item->name, $limit = 150, $end = '...') }}
                                         </td>
                                         <td>
                                             <a target="_blank" href="{{$item->value}}">
