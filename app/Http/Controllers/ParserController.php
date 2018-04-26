@@ -44,18 +44,18 @@ class ParserController extends Controller
     public function getPaginationLink($url)
     {
         $dom = HtmlDomParser::str_get_html(file_get_contents($url));
-        $url = $dom->find('a.pagination-page');
-        if(!count($url))return [$url];
-        $url = end($url);
-        preg_match('/p\=([0-9]*)/is', $url->href, $c);
+        $_url = $dom->find('a.pagination-page');
+        if(!count($_url))return [$url];
+        $_url = end($_url);
+        preg_match('/p\=([0-9]*)/is', $_url->href, $c);
         $arr = [];
         if(isset($c[1])){
             for($i = 1; $i<=$c[1]; $i++){
-                $arr[] = preg_replace('/p\=([0-9]*)/is', 'p='.$i, $url->href);
+                $arr[] = preg_replace('/p\=([0-9]*)/is', 'p='.$i, $_url->href);
             }
         }
         else{
-            $arr[] = $url->href;
+            $arr[] = $_url->href;
         }
         return $arr;
     }
