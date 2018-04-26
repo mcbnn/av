@@ -46,9 +46,10 @@ class ParserController extends Controller
     {
         $dom = HtmlDomParser::str_get_html(file_get_contents($url));
         $_url = $dom->find('a.pagination-page');
+        var_dump(count($_url));die();
         if(!count($_url))return [$url];
         $_url = end($_url);
-        var_dump($_url->href);die();
+
         preg_match('/p\=([0-9]*)/is', $_url->href, $c);
         $arr = [];
         if(isset($c[1])){
