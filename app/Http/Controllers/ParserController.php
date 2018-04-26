@@ -43,6 +43,7 @@ class ParserController extends Controller
      */
     public function getPaginationLink($url)
     {
+        print_r(date('d.n.Y H:i:s'));die();
         $dom = HtmlDomParser::str_get_html(file_get_contents($url));
         $_url = $dom->find('a.pagination-page');
         if(!count($_url))return [$url];
