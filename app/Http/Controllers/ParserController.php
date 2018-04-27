@@ -39,9 +39,7 @@ class ParserController extends Controller
         $param = \App\Params::find($id);
         if(!$param)abort(404);
         $urls = $this->getPaginationLink($param->value);
-
         $parsers = $this->parser($urls);
-        syslog(LOG_NOTICE, json_encode($parsers));
         $param->saveContents($parsers);
         return redirect('params');
     }
