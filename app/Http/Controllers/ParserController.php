@@ -39,8 +39,9 @@ class ParserController extends Controller
         $param = \App\Params::find($id);
         if(!$param)abort(404);
         $urls = $this->getPaginationLink($param->value);
-        var_dump($urls);die();
+
         $parsers = $this->parser($urls);
+        var_dump($parsers);die();
         $param->saveContents($parsers);
         return redirect('params');
     }
@@ -115,6 +116,7 @@ class ParserController extends Controller
                 if(count($dom->find('div.item'))){
                     foreach ($dom->find('div.item') as $item)
                         $arr[$item->id] = $item->find('a')[0]->href;
+                         syslog(LOG_NOTICE, $arr);
                 }
             }
         }
