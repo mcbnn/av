@@ -116,7 +116,7 @@ class ParserController extends Controller
                 if(count($dom->find('div.item'))){
                     foreach ($dom->find('div.item') as $item)
                         $arr[$item->id] = $item->find('a')[0]->href;
-                         syslog(LOG_NOTICE, $arr);
+                         syslog(LOG_NOTICE, json_encode($arr));
                 }
             }
         }
