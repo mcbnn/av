@@ -50,6 +50,7 @@ class Params extends Model
         foreach($parsers as $key => $parser){
             $check = \App\Contents::where('key', $key)->orWhere('url', $parser)->count();
             syslog(LOG_NOTICE,  $key);
+            syslog(LOG_NOTICE,  $check);
             if($check)continue;
             $content = new \App\Contents();
             $content->key = $key;
