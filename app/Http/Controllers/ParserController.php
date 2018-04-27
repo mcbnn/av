@@ -45,7 +45,7 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
-        syslog('LOG_INFO', $url);
+        syslog(LOG_INFO, $url);
         $client = new \GuzzleHttp\Client;
         sleep(5);
         $response = $client->request('GET', $url, [
