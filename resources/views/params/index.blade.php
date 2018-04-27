@@ -20,7 +20,9 @@
                                     <th>count</th>
                                     <th>cron</th>
                                     <th>update</th>
+                                    <th>почта</th>
                                     <th>test</th>
+
                                     <th>delete</th>
                                 </thead>
                                 <tbody>
@@ -53,6 +55,9 @@
                                         </td>
                                         <td>
                                             {{$item->updated_at->format('d.m.Y H:i:s')}}
+                                        </td>
+                                        <td>
+                                            {{$item->mail}}
                                         </td>
                                         <td>
                                             <a href="{{route('parser-test', ['id' => $item->id])}}">test</a>

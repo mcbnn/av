@@ -13,5 +13,10 @@
     {!! Form::checkbox('cron') !!}
 </div>
 <div class="form-group">
+    {!! Form::hidden('mail', false) !!}
+    {!! Form::label('mail', 'mail:') !!}
+    {!! Form::checkbox('mail') !!}
+</div>
+<div class="form-group">
     {!! Form::submit($submit_text, ['class' => 'btn btn-primary form-control']) !!}
 </div>
