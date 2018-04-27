@@ -46,6 +46,7 @@ class Params extends Model
     public function saveContents($parsers = null)
     {
         if(!$parsers)return null;
+        syslog(LOG_NOTICE,  json_encode($parsers));
         foreach($parsers as $key => $parser){
             syslog(LOG_NOTICE, time().'--'.\App\Contents::where('key', $key)->orWhere('url', $parser)->count());
             if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
