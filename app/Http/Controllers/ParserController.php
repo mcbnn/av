@@ -45,7 +45,6 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
-        syslog(LOG_INFO, $url);
         $client = new \GuzzleHttp\Client;
         sleep(5);
         $response = $client->request('GET', $url, [
@@ -105,8 +104,8 @@ class ParserController extends Controller
      */
     public function parser($url = null)
     {
+        $arr = [];
         if(is_array($url)){
-            $arr = [];
             foreach($url as $url){
                 if(!stristr($url, 'http'))$url = $this->domain.trim($url, '/');
                 $html = $this->getHtmlAvito($url);
