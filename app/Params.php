@@ -47,7 +47,7 @@ class Params extends Model
     {
         if(!$parsers)return null;
         foreach($parsers as $key => $parser){
-            syslog(LOG_NOTICE, \App\Contents::where('key', $key)->orWhere('url', $parser)->count());
+            syslog(LOG_NOTICE, time().'--'.\App\Contents::where('key', $key)->orWhere('url', $parser)->count());
             if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
             $content = new \App\Contents();
             $content->key = $key;
