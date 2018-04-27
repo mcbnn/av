@@ -29,7 +29,6 @@ class ParserController extends Controller
         return $this->getHtmlAvito($url);
     }
 
-
     /**
      * @param $id
      *

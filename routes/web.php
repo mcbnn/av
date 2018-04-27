@@ -18,3 +18,9 @@ Route::get('/parser/{id}', 'ParserController@parserUrl')->name('parser-url');
 Route::get('/parser/test/{id}', 'ParserController@test')->name('parser-test');
 Route::get('/parser', 'ParserController@parser');
 Route::get('/init', 'ParserController@init');
+Route::get('/test/mail', function () {
+    Mail::send('emails.test', ['data' => ['fff']], function ($message) {
+        $message->from('mcbnn123@gmail.com', date('d.m h:i:s'));
+        $message->to('mc_bnn@mail.ru');
+    });
+});
