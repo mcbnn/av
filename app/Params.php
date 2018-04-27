@@ -48,8 +48,9 @@ class Params extends Model
         if(!$parsers)return null;
         syslog(LOG_NOTICE,  json_encode($parsers));
         foreach($parsers as $key => $parser){
-            syslog(LOG_NOTICE, time().'--'.\App\Contents::where('key', $key)->orWhere('url', $parser)->count());
-            if(\App\Contents::where('key', $key)->orWhere('url', $parser)->count())continue;
+            $check = \App\Contents::where('key', $key)->orWhere('url', $parser)->count();
+            syslog(LOG_NOTICE,  $key);
+            if($check)continue;
             $content = new \App\Contents();
             $content->key = $key;
             $content->url = $parser;
