@@ -93,7 +93,6 @@ class ParserController extends Controller
         foreach ($params as $item){
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
-            var_dump($item->el);
             if($item->el)$item->sendMail($item);
         }
     }
