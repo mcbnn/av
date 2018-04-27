@@ -49,9 +49,9 @@ class Params extends Model
         syslog(LOG_NOTICE,  json_encode($parsers));
         foreach($parsers as $key => $parser){
             $check = \App\Contents::where('key', $key)->orWhere('url', $parser)->count();
-            syslog(LOG_NOTICE,  $key);
-            syslog(LOG_NOTICE,  $check);
+            syslog(LOG_NOTICE,  json_encode($check));
             if($check)continue;
+            syslog(LOG_NOTICE,  $key);
             $content = new \App\Contents();
             $content->key = $key;
             $content->url = $parser;
