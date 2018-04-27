@@ -14,7 +14,8 @@ class Params extends Model
     protected $fillable = [
         'name',
         'value',
-        'cron'
+        'cron',
+        'mail'
     ];
 
     protected $table = "params";
