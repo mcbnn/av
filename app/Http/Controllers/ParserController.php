@@ -84,6 +84,7 @@ class ParserController extends Controller
         else{
             $arr[] = $_url->href;
         }
+        return ['https://www.avito.ru/sankt-peterburg/kvartiry/prodam?p=2&s=104&sgtd=21&user=1&q=%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D0%B0'];
         return $arr;
     }
 
