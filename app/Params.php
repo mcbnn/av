@@ -25,10 +25,19 @@ class Params extends Model
         'updated_at'
     ];
 
+    /**
+     * @param $value
+     */
     public function setCronAttribute($value)
     {
         $this->attributes['cron'] = ($value == null)?0:1;
     }
+
+    public function setMailAttribute($value)
+    {
+        $this->attributes['cron'] = ($value == null)?0:1;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
