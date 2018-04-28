@@ -35,7 +35,7 @@ class Params extends Model
 
     public function setMailAttribute($value)
     {
-        $this->attributes['cron'] = ($value == null)?0:1;
+        $this->attributes['mail'] = ($value == null)?0:1;
     }
 
     /**
