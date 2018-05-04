@@ -51,6 +51,7 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
+        if(!stristr($url, 'http'))$url = $this->domain.trim($url, '/');
         $client = new \GuzzleHttp\Client;
         sleep(5);
         $response = $client->request('GET', $url, [
@@ -100,7 +101,7 @@ class ParserController extends Controller
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
             if($item->mail == 1){
-                $this->checkUrlLimitCount($this->el);
+                $this->checkUrlLimitCount();
                 if(count($this->el))$item->sendMail($item);
             }
         }
@@ -132,7 +133,6 @@ class ParserController extends Controller
         $arr = [];
         if(is_array($url)){
             foreach($url as $url){
-                if(!stristr($url, 'http'))$url = $this->domain.trim($url, '/');
                 $html = $this->getHtmlAvito($url);
                 $dom = HtmlDomParser::str_get_html($html);
                 if(count($dom->find('div.item'))){
@@ -142,7 +142,6 @@ class ParserController extends Controller
             }
         }
         else{
-            if(!stristr($url, 'http'))$url = $this->domain.trim($url, '/');
             $html = $this->getHtmlAvito($url);
             $dom = HtmlDomParser::str_get_html($html);
             $arr = [];
