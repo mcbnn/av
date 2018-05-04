@@ -13,6 +13,11 @@ trait MailTrait {
         $this->el[] = $el;
     }
 
+    public function deleteElement($key)
+    {
+        unset($this->el[$key]);
+    }
+
     public function sendMail($param)
     {
         if(!$this->el)return;

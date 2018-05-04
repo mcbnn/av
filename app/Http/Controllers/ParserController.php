@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\MailTrait;
 use App\Contents;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -10,7 +11,12 @@ use Sunra\PhpSimple\HtmlDomParser;
 
 class ParserController extends Controller
 {
+
+    use MailTrait;
+
     public $domain = "https://www.avito.ru/";
+
+    public $limit_see = 40;
 
     /**
      * init
@@ -93,7 +99,26 @@ class ParserController extends Controller
         foreach ($params as $item){
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
-            if($item->el and $item->mail == 1)$item->sendMail($item);
+            if($item->mail == 1){
+                $this->checkUrlLimitCount($this->el);
+                if(count($this->el))$item->sendMail($item);
+            }
+        }
+    }
+
+    public function checkUrlLimitCount()
+    {
+        foreach($this->el as $key => $item) {
+            $html = $this->getHtmlAvito($item->url);
+            $dom = HtmlDomParser::str_get_html($html);
+            if (count($dom->find('span.title-info-views'))) {
+                $text_count = $dom->find('span.title-info-views')[0]->text();
+                $count_see = trim(preg_replace('/\(.*\)/isu', '', $text_count));
+                if ($count_see >= $this->limit_see)$this->deleteElement($key);
+            }
+            else{
+                syslog('LOG_ERR', 'not get see count '. $item->url);
+            }
         }
     }
 
