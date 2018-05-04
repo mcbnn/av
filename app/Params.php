@@ -63,7 +63,7 @@ class Params extends Model
             $content->key = $key;
             $content->url = $parser;
             $this->setElement($content);
-            //$this->contents()->save($content);
+            $this->contents()->save($content);
         }
         return true;
     }
