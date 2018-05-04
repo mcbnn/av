@@ -114,7 +114,7 @@ class ParserController extends Controller
             $dom = HtmlDomParser::str_get_html($html);
             if (count($dom->find('span.title-info-views'))) {
                 $text_count = $dom->find('span.title-info-views')[0]->text();
-                $count_see = trim(preg_replace('/\(.*\)/isu', '', $text_count));
+                $count_see = (int)trim(preg_replace('/\(.*\)/isu', '', $text_count));
                 if ($count_see >= $this->limit_see)$this->deleteElement($key);
             }
             else{
