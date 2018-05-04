@@ -107,6 +107,9 @@ class ParserController extends Controller
         }
     }
 
+    /**
+     * Проверка на количество просмотров
+     */
     public function checkUrlLimitCount()
     {
         foreach($this->el as $key => $item) {
@@ -115,6 +118,8 @@ class ParserController extends Controller
             if (count($dom->find('span.title-info-views'))) {
                 $text_count = $dom->find('span.title-info-views')[0]->text();
                 $count_see = (int)trim(preg_replace('/\(.*\)/isu', '', $text_count));
+                syslog('LOG_ERR', 'check url  '. $item->url);
+                syslog('LOG_ERR', 'count_see '. $count_see);
                 if ($count_see >= $this->limit_see)$this->deleteElement($key);
             }
             else{
