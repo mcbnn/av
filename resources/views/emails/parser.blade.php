@@ -1,7 +1,7 @@
 @if(count($data) != 0)
     <ul>
-    @foreach($data as $item)
-            <li><a target="_blank" href = "https://avito.ru{{$item->url}}">{{$item->key}}</li>
+    @foreach($data as $key => $item)
+            <li><a target="_blank" href = "https://avito.ru{{$item}}">{{$key}}</li>
     @endforeach
     </ul>
 @endif
