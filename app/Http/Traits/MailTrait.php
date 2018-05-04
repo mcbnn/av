@@ -6,22 +6,22 @@ use Mail;
 
 trait MailTrait {
 
-    public $el = [];
+    public static $el = [];
 
     public function setElement($el)
     {
-        $this->el[] = $el;
+        MailTrait::$el[$el->key] = $el->url;
     }
 
     public function deleteElement($key)
     {
-        if(isset($this->el[$key]))unset($this->el[$key]);
+        if(isset(MailTrait::$el[$key]))unset(self::$el[$key]);
     }
 
     public function sendMail($param)
     {
-        if(!$this->el)return;
-        Mail::send('emails.parser', ['data' => $this->el], function ($message) use ($param) {
+        if(!MailTrait::$el)return;
+        Mail::send('emails.parser', ['data' =>  MailTrait::$el], function ($message) use ($param) {
             $message->from('mcbnn123@gmail.com', date('d.m h:i:s').' '.$param->name);
             $message->to($param->user->email);
         });
