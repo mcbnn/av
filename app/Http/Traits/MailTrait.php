@@ -15,7 +15,7 @@ trait MailTrait {
 
     public function deleteElement($key)
     {
-        unset($this->el[$key]);
+        if(isset($this->el[$key]))unset($this->el[$key]);
     }
 
     public function sendMail($param)
