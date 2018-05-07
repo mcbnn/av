@@ -13,8 +13,6 @@ class ParserController extends Controller
 {
     use MailTrait;
 
-    public $domain = "https://www.avito.ru/";
-
     public $limit_see = 40;
 
     /**
@@ -50,7 +48,7 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
-        if(!stristr($url, 'http'))$url = $this->domain.trim($url, '/');
+        if(!stristr($url, 'http'))$url = config('app.url_avito').trim($url, '/');
         $client = new \GuzzleHttp\Client;
         sleep(5);
         $response = $client->request('GET', $url, [

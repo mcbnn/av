@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'url_avito' => 'https://www.avito.ru/',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

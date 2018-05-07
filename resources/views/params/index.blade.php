@@ -29,7 +29,7 @@
                                 @foreach($list as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{url('params', ['id' => $item->id])}}">
+                                            <a href="{{url('contents', ['params_id' => $item->id])}}">
                                                 {{$item->id}}
                                             </a>
                                         </td>

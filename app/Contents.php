@@ -27,6 +27,12 @@ class Contents extends Model
         return $this->belongsTo(\App\Params::class, 'param_id', 'id');
     }
 
+    public function geturlFullAttribute()
+    {
+        if(!stristr($this->url, 'http'))$url = config('app.url_avito').trim($this->url, '/');
+        return $url;
+    }
+
     /**
      *
      */
