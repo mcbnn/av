@@ -153,4 +153,11 @@ class ParserController extends Controller
         }
         return $arr;
     }
+
+    /**
+     * Тест
+     */
+    public function testCount()
+    {
+    }
 }
