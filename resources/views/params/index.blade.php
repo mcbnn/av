@@ -15,14 +15,14 @@
                                     <th>id</th>
                                     <th>name</th>
                                     <th>value</th>
-                                    <th>edit</th>
+
                                     <th>parser ALL</th>
                                     <th>count</th>
                                     <th>cron</th>
-                                    <th>update</th>
                                     <th>почта</th>
+                                    <th>update</th>
                                     <th>test</th>
-
+                                    <th>edit</th>
                                     <th>delete</th>
                                 </thead>
                                 <tbody>
@@ -42,9 +42,6 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('params.edit', ['id' => $item->id])}}">Edit</a>
-                                        </td>
-                                        <td>
                                             <a href="{{route('parser-url', ['id' => $item->id])}}">Parser All</a>
                                         </td>
                                         <td>
@@ -54,13 +51,16 @@
                                             {{$item->cron}}
                                         </td>
                                         <td>
-                                            {{$item->updated_at->format('d.m.Y H:i:s')}}
-                                        </td>
-                                        <td>
                                             {{$item->mail}}
                                         </td>
                                         <td>
+                                            {{$item->updated_at->format('d.m.Y H:i:s')}}
+                                        </td>
+                                        <td>
                                             <a href="{{route('parser-test', ['id' => $item->id])}}">test</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('params.edit', ['id' => $item->id])}}">Edit</a>
                                         </td>
                                         <td>
                                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'params.destroy', $item->id ]])}}
