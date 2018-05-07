@@ -24,7 +24,7 @@
                                             {{$item->id}}
                                         </td>
                                         <td>
-                                            <a target="_blank" href = "{{$item->url_full}}">
+                                            <a class = "link" target="_blank" href = "{{$item->url_full}}">
                                             {{$item->key}}
                                             </a>
                                         </td>

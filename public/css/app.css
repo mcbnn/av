@@ -9040,6 +9040,6 @@ a.text-dark:focus, a.text-dark:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .04)
 }
 
-a:visited{
+.link a:visited{
     color: black;
 }
