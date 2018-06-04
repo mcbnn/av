@@ -8,6 +8,10 @@
     {!! Form::text('value', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('type', 'type:') !!}
+    {!! Form::text('type', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::hidden('cron', false) !!}
     {!! Form::label('cron', 'cron:') !!}
     {!! Form::checkbox('cron') !!}

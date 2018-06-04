@@ -15,7 +15,8 @@ class Params extends Model
         'name',
         'value',
         'cron',
-        'mail'
+        'mail',
+        'type'
     ];
 
     protected $table = "params";

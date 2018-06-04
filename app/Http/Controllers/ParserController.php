@@ -20,8 +20,28 @@ class ParserController extends Controller
      */
     public function init()
     {
-        $params = \App\Params::where('cron', 1)->get();
-        $this->model($params);
+
+        /**
+         * Парсер талонов для поликлиники
+        */
+        $params = \App\Params::where('cron', 1)->where('type', 2)->get();
+        $this->getContentType($params);
+        /**
+         * Парсер авито
+         */
+        $this->model(\App\Params::where('cron', 1)->where('type', 1)->get());
+    }
+
+    public function getContentType(\Illuminate\Database\Eloquent\Collection $params = null)
+    {
+        if(!$params)return null;
+        /** @var \App\Params $item */
+        foreach ($params as $item){
+
+            if($parsers = $this->parserPol($item->value)){
+                $item->sendMailPol($item, $parsers);
+            }
+        }
     }
 
     public function test($id)
@@ -45,6 +65,23 @@ class ParserController extends Controller
         $parsers = $this->parser($urls);
         $param->saveContents($parsers);
         return redirect('params');
+    }
+
+    public function getHtmlPol($url){
+
+        $client = new \GuzzleHttp\Client;
+        sleep(5);
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'Cookie:' => 'JSESSIONID=a242e2f9f5f32f400dda7f809fa4',
+                'Upgrade-Insecure-Requests'=> '1'
+            ]
+        ]);
+        if($response->getStatusCode() != 200){
+            syslog(LOG_ERR, 'avito error not 200');
+            return false;
+        }
+        return $response->getBody()->getContents();
     }
 
     public function getHtmlAvito($url){
@@ -122,6 +159,21 @@ class ParserController extends Controller
                 syslog(LOG_ERR, 'not get see count '. $item);
             }
         }
+    }
+
+    public function parserPol($url = null)
+    {
+        $arr = [];
+        $html = $this->getHtmlPol($url);
+        $dom = HtmlDomParser::str_get_html($html);
+        if(count($dom->find('li'))){
+            foreach ($dom->find('li button') as $item){
+                if(stristr($item->class, 'attention'))continue;
+                $arr[$item->id]['class'] = $item->class;
+                $arr[$item->id]['text'] = $item->text();
+            }
+        }
+        return $arr;
     }
 
     /**
