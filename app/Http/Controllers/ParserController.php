@@ -24,8 +24,8 @@ class ParserController extends Controller
         /**
          * Парсер талонов для поликлиники
         */
-        $params = \App\Params::where('cron', 1)->where('type', 2)->get();
-        $this->getContentType($params);
+//        $params = \App\Params::where('cron', 1)->where('type', 2)->get();
+//        $this->getContentType($params);
         /**
          * Парсер авито
          */
