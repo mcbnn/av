@@ -1,7 +1,7 @@
 @if(count($data) != 0)
     <ul>
     @foreach($data as $key => $item)
-            <li>{{$item['text']}}</li>
+            <li>{{$item}}</li>
     @endforeach
     </ul>
 @endif

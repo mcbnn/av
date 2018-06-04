@@ -39,7 +39,10 @@ class ParserController extends Controller
         foreach ($params as $item){
 
             if($parsers = $this->parserPol($item->value)){
-                $item->sendMailPol($item, $parsers);
+                $item->saveContentsPol($parsers);
+                if($item->mail == 1){
+                    if(count(MailTrait::$el))$item->sendMailPol($item);
+                }
             }
         }
     }

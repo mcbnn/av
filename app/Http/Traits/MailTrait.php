@@ -27,9 +27,9 @@ trait MailTrait {
         });
     }
 
-    public function sendMailPol($param, $arr)
+    public function sendMailPol($param)
     {
-        Mail::send('emails.parser_pol', ['data' => $arr], function ($message) use ($param) {
+        Mail::send('emails.parser_pol', ['data' =>  MailTrait::$el], function ($message) use ($param) {
             $message->from('mcbnn123@gmail.com', date('d.m h:i:s').' '.$param->name);
             $message->to($param->user->email);
         });

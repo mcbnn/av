@@ -70,6 +70,23 @@ class Params extends Model
         return true;
     }
 
+    public function saveContentsPol($parsers = null)
+    {
+        if(!$parsers)return null;
+        MailTrait::$el = [];
+        foreach($parsers as $key => $parser){
+            $check = \App\Contents::where('key', $key)->count();
+            if($check)continue;
+            $content = new \App\Contents();
+            $content->key = $key;
+            $content->url = $parser['text'];
+            $this->setElement($content);
+            $this->contents()->save($content);
+        }
+        return true;
+    }
+
+
     /**
      *
      */
