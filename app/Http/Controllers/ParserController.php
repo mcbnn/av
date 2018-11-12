@@ -174,7 +174,7 @@ class ParserController extends Controller
         foreach(MailTrait::$el as $key => $item) {
             $html = $this->getHtmlAvito($item);
             $dom = HtmlDomParser::str_get_html($html);
-            $text_count = (count($dom->find('.js-show-stat')))?'.js-show-stat':'span.title-info-views';
+            $text_count = (count($dom->find('.title-info-metadata-views')))?'.title-info-metadata-views':'.title-info-views';
             if (count($dom->find($text_count))) {
                 $text_count = $dom->find($text_count)[0]->text();
                 $count_see = trim(preg_replace('/\(.*\)/isu', '', $text_count));
