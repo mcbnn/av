@@ -22,15 +22,20 @@ class ParserController extends Controller
     {
 
         /**
-         * Парсер талонов для поликлиники
-        */
-//        $params = \App\Params::where('cron', 1)->where('type', 2)->get();
-//        $this->getContentType($params);
-        /**
          * Парсер авито
          */
         $this->model(\App\Params::where('cron', 1)->where('type', 1)->get());
     }
+
+    public function initTest()
+    {
+
+        /**
+         * Парсер авито
+         */
+        $this->modelTest(\App\Params::where('id', 4)->get());
+    }
+
 
     public function getContentType(\Illuminate\Database\Eloquent\Collection $params = null)
     {
@@ -138,24 +143,53 @@ class ParserController extends Controller
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
             if($item->mail == 1){
-                $this->checkUrlLimitCount();
+                $this->checkUrlLimitCount($item->words);
                 if(count(MailTrait::$el))$item->sendMail($item);
             }
         }
     }
 
     /**
+     * @param \Illuminate\Database\Eloquent\Collection $params
+     */
+    public function modelTest(\Illuminate\Database\Eloquent\Collection $params)
+    {
+        /** @var \App\Params $item */
+        foreach( $params as $item )
+        {
+            $parsers = $this->parser($item->value);
+            $item->saveContents($parsers, true);
+
+            $this->checkUrlLimitCount($item->words);
+            if( count(MailTrait::$el) ) $item->sendMail($item);
+
+        }
+    }
+
+    /**
      * Проверка на количество просмотров
      */
-    public function checkUrlLimitCount()
+    public function checkUrlLimitCount($words = null)
     {
         foreach(MailTrait::$el as $key => $item) {
             $html = $this->getHtmlAvito($item);
             $dom = HtmlDomParser::str_get_html($html);
-            if (count($dom->find('span.title-info-views'))) {
-                $text_count = $dom->find('span.title-info-views')[0]->text();
+            $text_count = (count($dom->find('.js-show-stat')))?'.js-show-stat':'span.title-info-views';
+            if (count($dom->find($text_count))) {
+                $text_count = $dom->find($text_count)[0]->text();
                 $count_see = trim(preg_replace('/\(.*\)/isu', '', $text_count));
                 $count_see = (int)preg_replace('/\s/isu', '', $count_see);
+                $text = $dom->find('div.item-view')[0]->text();
+                if($words)
+                {
+                    $exp = explode(',', $words);
+                    $check = false;
+                    foreach($exp as $word)
+                    {
+                        if(mb_stristr($text, $word, 'UTF-8') !== false)$check = true;
+                    }
+                    if(!$check)$this->deleteElement($key);
+                }
                 if ($count_see >= $this->limit_see)$this->deleteElement($key);
             }
             else{

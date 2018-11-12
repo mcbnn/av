@@ -16,7 +16,8 @@ class Params extends Model
         'value',
         'cron',
         'mail',
-        'type'
+        'type',
+        'words'
     ];
 
     protected $table = "params";
@@ -54,18 +55,18 @@ class Params extends Model
         return $this->belongsTo(\App\User::class, 'user_id', 'id');
     }
 
-    public function saveContents($parsers = null)
+    public function saveContents($parsers = null, $test = false)
     {
         if(!$parsers)return null;
         MailTrait::$el = [];
         foreach($parsers as $key => $parser){
             $check = \App\Contents::where('key', $key)->orWhere('url', $parser)->count();
-            if($check)continue;
+            if($check && !$test)continue;
             $content = new \App\Contents();
             $content->key = $key;
             $content->url = $parser;
             $this->setElement($content);
-            $this->contents()->save($content);
+            if(!$test)$this->contents()->save($content);
         }
         return true;
     }

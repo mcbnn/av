@@ -12,6 +12,10 @@
     {!! Form::text('type', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('words', 'слова:') !!}
+    {!! Form::text('words', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::hidden('cron', false) !!}
     {!! Form::label('cron', 'cron:') !!}
     {!! Form::checkbox('cron') !!}
