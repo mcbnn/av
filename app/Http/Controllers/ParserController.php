@@ -123,6 +123,7 @@ class ParserController extends Controller
     public function getPaginationLink($url)
     {
         $html = $this->getHtmlAvito($url);
+	    if(!$html)return;
         $dom = HtmlDomParser::str_get_html($html);
         $_url = $dom->find('a.pagination-page');
         if(!count($_url))return [$url];
@@ -180,6 +181,7 @@ class ParserController extends Controller
     {
         foreach(MailTrait::$el as $key => $item) {
             $html = $this->getHtmlAvito($item);
+	        if(!$html)continue;
             $dom = HtmlDomParser::str_get_html($html);
             $text_count = (count($dom->find('.title-info-metadata-views')))?'.title-info-metadata-views':'.title-info-views';
             if (count($dom->find($text_count))) {
@@ -231,6 +233,7 @@ class ParserController extends Controller
         if(is_array($url)){
             foreach($url as $url){
                 $html = $this->getHtmlAvito($url);
+	            if(!$html)return;
                 $dom = HtmlDomParser::str_get_html($html);
                 if(count($dom->find('div.item'))){
                     foreach ($dom->find('div.item') as $item)
@@ -240,6 +243,7 @@ class ParserController extends Controller
         }
         else{
             $html = $this->getHtmlAvito($url);
+            if(!$html)return;
             $dom = HtmlDomParser::str_get_html($html);
             $arr = [];
             if(count($dom->find('div.item'))){
