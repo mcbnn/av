@@ -105,10 +105,8 @@ class ParserController extends Controller
         }
         catch (\Exception $e)
         {
-        	var_dump($e->getMessage());
+	        syslog(LOG_ERR, 'avito error request '.$e->getMessage());
         }
-
-       die();
         if($response->getStatusCode() != 200){
             syslog(LOG_ERR, 'avito error not 200');
             return false;
