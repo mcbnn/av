@@ -33,5 +33,6 @@ trait MailTrait {
             $message->from('mcbnn123@gmail.com', date('d.m h:i:s').' '.$param->name);
             $message->to($param->user->email);
         });
+	    MailTrait::$el = [];
     }
 }
