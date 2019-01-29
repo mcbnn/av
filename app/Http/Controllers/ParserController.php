@@ -148,6 +148,7 @@ class ParserController extends Controller
     {
         /** @var \App\Params $item */
         foreach ($params as $item){
+            MailTrait::$el = [];
             $parsers = $this->parser($item->value);
             $item->saveContents($parsers);
             if($item->mail == 1){
