@@ -92,6 +92,7 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
+        var_dump(MAX_FILE_SIZE);
         phpinfo();die();
         if(!stristr($url, 'http'))$url = config('app.url_avito').trim($url, '/');
         $client = new \GuzzleHttp\Client;
