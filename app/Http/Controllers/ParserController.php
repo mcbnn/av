@@ -96,8 +96,6 @@ class ParserController extends Controller
         {
             define('MAX_FILE_SIZE', 60000000);
         }
-        var_dump(MAX_FILE_SIZE);
-        phpinfo();die();
         if(!stristr($url, 'http'))$url = config('app.url_avito').trim($url, '/');
         $client = new \GuzzleHttp\Client;
         sleep(5);
