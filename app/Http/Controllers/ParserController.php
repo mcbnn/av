@@ -124,10 +124,10 @@ class ParserController extends Controller
     {
         $html = $this->getHtmlAvito($url);
 	    if(!$html)return;
-	    var_dump($html);die();
+	    var_dump($html);
         $dom = HtmlDomParser::str_get_html($html);
-
-        $_url = $dom->find('a.pagination-page');
+	    var_dump($dom);
+	    $_url = $dom->find('a.pagination-page');
 
         if(!count($_url))return [$url];
         $_url = end($_url);
