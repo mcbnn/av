@@ -92,6 +92,10 @@ class ParserController extends Controller
     }
 
     public function getHtmlAvito($url){
+        if (!defined('MAX_FILE_SIZE'))
+        {
+            define('MAX_FILE_SIZE', 600000);
+        }
         var_dump(MAX_FILE_SIZE);
         phpinfo();die();
         if(!stristr($url, 'http'))$url = config('app.url_avito').trim($url, '/');
