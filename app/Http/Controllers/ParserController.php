@@ -126,7 +126,7 @@ class ParserController extends Controller
 	    if(!$html)return;
         $dom = HtmlDomParser::str_get_html($html);
         $_url = $dom->find('a.pagination-page');
-	    var_dump($_url);die();
+	    var_dump($dom);die();
         if(!count($_url))return [$url];
         $_url = end($_url);
         preg_match('/p\=([0-9]*)/is', $_url->href, $c);
