@@ -123,12 +123,11 @@ class ParserController extends Controller
     public function getPaginationLink($url)
     {
         $html = $this->getHtmlAvito($url);
-	    if(!$html)return;
-	    var_dump($html);
+        if (!$html) {
+            return;
+        }
         $dom = HtmlDomParser::str_get_html($html);
-	    var_dump($dom);
-	    $_url = $dom->find('a.pagination-page');
-
+        $_url = $dom->find('a.pagination-page');
         if(!count($_url))return [$url];
         $_url = end($_url);
         preg_match('/p\=([0-9]*)/is', $_url->href, $c);
